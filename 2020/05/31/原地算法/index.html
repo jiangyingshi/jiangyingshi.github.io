@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,18 +10,19 @@
   
   <title>原地算法 | 江颖诗的博客</title>
 
-  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="shortcut icon" href="/images/favicon.jpg">
   <link rel="alternate" href="/atom.xml" title="江颖诗的博客" type="application/atom+xml">
   <meta name="description" content="原地算法基本上不需要额外辅助的数据结构，允许少量额外的辅助变量来转换数据的算法。当算法允许时，输入的数据通常会被要输出的数据覆盖。输入数据被它的输出数据覆盖定义为原地算法既是不充分（快速排序的案例）也非必要。原地算法包含使用O(1)空间复杂度的所有算法。 实例12345function reverse(a[0..n])     allocate b[0..n]     for i from 0 t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原地算法">
-<meta property="og:url" content="https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="江颖诗的博客">
 <meta property="og:description" content="原地算法基本上不需要额外辅助的数据结构，允许少量额外的辅助变量来转换数据的算法。当算法允许时，输入的数据通常会被要输出的数据覆盖。输入数据被它的输出数据覆盖定义为原地算法既是不充分（快速排序的案例）也非必要。原地算法包含使用O(1)空间复杂度的所有算法。 实例12345function reverse(a[0..n])     allocate b[0..n]     for i from 0 t">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-31T12:39:14.000Z">
 <meta property="article:modified_time" content="2022-03-31T03:03:16.533Z">
 <meta property="article:author" content="江颖诗">
+<meta property="article:tag" content="江颖诗, 博客, Hexo">
 <meta name="twitter:card" content="summary">
 
   <meta name="keywords" content="">
@@ -30,22 +31,35 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="江颖诗的博客">
-  <meta name="msapplication-starturl" content="https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">
+  <meta name="msapplication-starturl" content="http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="江颖诗的博客">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/favicon.jpg">
 
   
-    <link rel="canonical" href="https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">
+    <link rel="canonical" href="http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">
   
 
-  
-  
+  <meta name="google-site-verification" content="fXjtlIfaDc_X-0P11rO3bEp1Nk4IKXphoJv0GqGZCco">
+  <meta name="baidu-site-verification" content="I3t1wfwZvd">
 
-  
-  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create','UA-139531378-1','auto');ga('send','pageview');
+</script>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?22e4d3b73c21ec2f0e1b4f3ff78c9a9c';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
   
 
   
@@ -56,7 +70,7 @@
 <link rel="stylesheet" href="/custom.css">
 
 </head>
-<body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-brown mdui-theme-accent-blue">
   <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
   <script>if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
   <script>var a=localStorage.getItem("mdui-drawer-close");if(!a){document.getElementsByTagName("body")[0].className+=" mdui-drawer-body-left"};</script>
@@ -65,26 +79,32 @@
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
     <a href="/" class="mdui-typo-headline">江颖诗的博客</a>
     <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'Search'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
     <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
   </div>
 </header>
 <div class="mdui-dialog" id="search">
   
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://jiangyingshi.github.io"></form>
-    <div class="search-result"></div>
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
   
 </div>
   <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
   <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
   <div class="mdui-grid-tile">
-    <img src="/images/banner.png" style="height: 160px;">
-    <img src="/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <img src="/images/banner.jpg" style="height: 160px;">
+    <img src="/images/avatar.jpg" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
     <div class="mdui-grid-tile-actions">
       <div class="mdui-grid-tile-text">
         <div class="mdui-grid-tile-title">江颖诗</div>
         <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>静水深流</div>
       </div>
+      
+        <div class="mdui-grid-tile-buttons">
+          <a href="mailto:1258787151@qq.com" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '1258787151@qq.com'}"><i class="mdui-icon material-icons">email</i></a>
+        </div>
       
     </div>
   </div>
@@ -92,18 +112,18 @@
   <div class="mdui-list" mdui-collapse="{accordion: true}">
     <a href="/" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">Home</div>
+      <div class="mdui-list-item-content">主页</div>
     </a>
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">archive</i>
-        <div class="mdui-list-item-content">Archive</div>
+        <div class="mdui-list-item-content">归档</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2022/03/">March 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/02/">February 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/01/">January 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/12/">December 2021<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/05/">May 2020<span class="mdui-ripple sidebar_archives-count">1</span></a>
+        <a class="mdui-ripple sidebar_archives-link" href="/archives/2022/03/">三月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/02/">二月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/01/">一月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/12/">十二月 2021<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/05/">五月 2020<span class="mdui-ripple sidebar_archives-count">1</span></a>
         
       </div>
     </div>
@@ -111,7 +131,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">class</i>
-        <div class="mdui-list-item-content">Category</div>
+        <div class="mdui-list-item-content">分类</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -124,7 +144,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">Tag</div>
+        <div class="mdui-list-item-content">标签</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -135,7 +155,7 @@
     </div>
     <a href="/about" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">About</div>
+      <div class="mdui-list-item-content">关于</div>
     </a>
   </div>
 
@@ -152,13 +172,13 @@
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">Links</div>
+        <div class="mdui-list-item-content">友情链接</div>
         <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Links</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">链接为空</a>
         
       </div>
     </div>
@@ -171,11 +191,11 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-13.png" style="max-height: 240px;">
+      <img src="/images/random/material-2.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">原地算法</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-05-31 / <i class="iconfont">&#xe601;</i> jingyingshi</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2020-05-31 / <i class="iconfont">&#xe601;</i> jingyingshi &nbsp;&nbsp; <span id="busuanzi_container_page_pv" style="display: none;"><i class="iconfont">&#xe7fd;</i> <span id="busuanzi_value_page_pv"></span></span></div>
         </div>
       </div>
       <div class="mdui-card-menu">
@@ -187,7 +207,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="https://chart.googleapis.com/chart?cht=qr&chs=246x246&chl=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&chld=M|2">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC00lEQVR42u3awY4aMRAE0P3/n06ukSImVW2TZe03J4Rgxs9IlLrbX7+uvL6wsbGxsbGxsbGxP5L9FV9/fv75Dn+//3Ipj896dZ92zdjY2Ng3sP/x1/+Cnbx+fsrsDu2asbGxse9hz0Lr+bvP30rulmxQtGZsbGxs7LIwaJeVlDfY2NjY2LsCbKVgWNkCbGxsbOz1ptKsFGnHD3kp8p96adjY2Ngfz54Ner/39bfNt7GxsbE/jN1eSdmwUookYTlcOTY2Nvah7Lb1v6vpvzIezgcG2NjY2DewV4Iq2ZT8ndlm5SvHxsbGPpvdtmz2DmXbrWxXhY2NjX02O4mZ2Tbtav1H4ZT8JNjY2NiHslvSrEmUR877ihxsbGzsU9ltmZEHSRJR7d3yQ0XY2NjY97CT9nobSG3jaddntpUi2NjY2Eew9zbx2zu0+Gh0jY2NjX0Nez0q8jKmHRK8cTyAjY2NfQT7+QF7W05tCbQhOLGxsbEPZa+0b5aOQo7ws/EzNjY29tnsXe34fFNydn7EJ9pQbGxs7KPZ66OCNvZWtjJfGzY2NvY97Ojw4iha2tFvHkv157GxsbEPZbdLb0fC7YChDbAijLGxsbEPZbdX2+hJyo9kWDt7FjY2NvY97Pbgez7ELY65x6XFMCCxsbGxL2CvvM6PZrbD2tkIedhLw8bGxv7h7PzKo6h9vx0eFwUSNjY29qHs2QNmsdQWNu04uR70YmNjYx/BzsMsKQzWy4xkqJAUIdjY2Ng3s9eb+LNhbdskStaAjY2NfQO7bSS1x+vzbXoOoTZEsbGxsW9j7wqt2bLyA0PtCBkbGxv7NvZKCZHEWzvWzYM2GktgY2NjY8dx0h7xaVtF+U+CjY2Njf2OEWwbS/nT31iKYGNjY/8Q9ixOkphJmlP5ndt7YmNjY9/Abge9u4IqaSHNDve8Zb6NjY2N/ZHsey5sbGxsbGxsbGzsj7l+AzO+kQOwAfsUAAAAAElFTkSuQmCC">
               
             </li>
           </ul>
@@ -196,25 +216,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=原地算法&url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&pic=https://jiangyingshi.github.io/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=原地算法&url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&pic=http://jiangyingshi.top/images/favicon.jpg&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=原地算法&url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&via=江颖诗" target="_blank" class="mdui-ripple">Share to Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=原地算法&url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&via=江颖诗" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">Share to Google+</a>
+              <a href="https://plus.google.com/share?url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&title=原地算法" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&title=原地算法" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=江颖诗的博客&title=原地算法&pics=https://jiangyingshi.github.io/images/favicon.png&url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">Share to QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=江颖诗的博客&title=原地算法&pics=http://jiangyingshi.top/images/favicon.jpg&url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&text=原地算法" target="_blank" class="mdui-ripple">Share to Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/&text=原地算法" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
@@ -230,9 +250,13 @@
 <p>a自己反转的内容来覆盖，把空间复杂度降为O(1)<br>快速排序常常被描述成一个原地算法，但事实并不是。大部分快速排序实现需要O(log n)的空间来支持它的分治递归。<br>它需要O(log2 n)空间，因为它的O(log n)堆栈帧架（stack frames）每一个都含有一个固定数量的指针（每一个大小为O(log n)）。<br>辨别拥有L的原地算法拥有某些有趣的含意；举例来说，它意指存在一个（相当地复杂）原地算法，决定在一个无向图（undirected graph）中的任两个节点（nodes）之间是否存在一条路径（path），这是一个需要O(n)个额外的空间，使用典型的算法像是深度优先搜索(depth-first search)（每个节点有个走访的比特）的问题。有些问题像是决定一个图形是否为二分图（bipartite graph）或测试两个图形使否有相同数量的连通分支，接着针对这些问题产出原地算法。</p>
 
       
+        <div class="mdui-m-y-2 mdui-text-center">
+          <button class="mdui-fab mdui-color-deep-orange mdui-text-color-white mdui-ripple" mdui-dialog="{target: '#donate'}" mdui-tooltip="{content: '打赏', position: 'top'}"><i class="mdui-icon material-icons">thumb_up</i></button>
+        </div>
+      
       <blockquote>
         
-        <strong>PermaLink: </strong><br><a href="https://jiangyingshi.github.io/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">https://jiangyingshi.github.io/2020/05/31/原地算法/</a>
+        <strong>本文链接：</strong><br><a href="http://jiangyingshi.top/2020/05/31/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95/">http://jiangyingshi.top/2020/05/31/原地算法/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -241,6 +265,30 @@
       
       
     </footer>
+    
+      <div class="mdui-dialog" id="donate">
+        <div class="mdui-tab mdui-tab-centered">
+          
+            <a href="#donate-0" class="mdui-ripple">支付宝</a>
+          
+            <a href="#donate-1" class="mdui-ripple">微信支付</a>
+          
+        </div>
+        
+        
+          <div id="donate-0" class="mdui-p-a-2 mdui-typo mdui-text-center">
+            
+              <img src="/images/alipay.jpg" style="width: 300px;">
+            
+          </div>
+        
+          <div id="donate-1" class="mdui-p-a-2 mdui-typo mdui-text-center">
+            
+              <img src="/images/wechat.jpg" style="width: 300px;">
+            
+          </div>
+        
+      </div>
     
   </article>
   
@@ -254,7 +302,7 @@
     
       <a rel="prev" class="extend prev" href="/2021/12/31/Integer-%E6%8B%86%E8%A3%85%E7%AE%B1/">
         <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
-        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Integer 拆装箱'}">Prev</span>
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Integer 拆装箱'}">上一篇</span>
       </a>
     
     <div class="spacer"></div>
@@ -273,6 +321,8 @@
     
     
     
+      <a href="https://github.com/jiangyingshi" target="_blank" class="mdui-btn mdui-btn-icon mdui-text-color-theme-a100"><i class="mdui-icon iconfont">&#xe7ab;</i></a>
+    
     
     
     
@@ -282,11 +332,14 @@
   <div class="mdui-p-y-1 mdui-text-center">
     Copyright &copy; 2022 江颖诗<br>
     Powered by <a href="https://hexo.io/" target="_blank" class="mdui-text-color-theme-accent">Hexo</a>
+    <br>
+      <span id="busuanzi_container_site_pv" style="display: none;"><i class="iconfont">&#xe7fd;</i> <span id="busuanzi_value_site_pv"></span></span> &nbsp;&nbsp;
+      <span id="busuanzi_container_site_uv" style="display: none;"><i class="iconfont">&#xe601;</i> <span id="busuanzi_value_site_uv"></span></span>
     
   </div>
 </footer>
   <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
-  
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 <script src="/js/mdui.js"></script>
 <script src="/js/script.js"></script>

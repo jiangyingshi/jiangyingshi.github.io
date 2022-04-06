@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,15 +10,15 @@
   
   <title>String 的长度限制 | 江颖诗的博客</title>
 
-  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="shortcut icon" href="/images/favicon.jpg">
   <link rel="alternate" href="/atom.xml" title="江颖诗的博客" type="application/atom+xml">
   <meta name="description" content="String类中有很多重载的构造函数，其中有几个是支持用户传入length来执行长度的： 1public String(byte bytes[], int offset, int length)   可以看出，String的最大长度需在int的范围内。根据Integer类的定义，java.lang.Integer#MAX_VALUE的最大值是2^31 - 1;但这个值只是在运行期间，我们构造Str">
 <meta property="og:type" content="article">
 <meta property="og:title" content="String 的长度限制">
-<meta property="og:url" content="https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/index.html">
+<meta property="og:url" content="http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/index.html">
 <meta property="og:site_name" content="江颖诗的博客">
 <meta property="og:description" content="String类中有很多重载的构造函数，其中有几个是支持用户传入length来执行长度的： 1public String(byte bytes[], int offset, int length)   可以看出，String的最大长度需在int的范围内。根据Integer类的定义，java.lang.Integer#MAX_VALUE的最大值是2^31 - 1;但这个值只是在运行期间，我们构造Str">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-13T06:33:02.000Z">
 <meta property="article:modified_time" content="2022-03-31T03:03:16.532Z">
 <meta property="article:author" content="江颖诗">
@@ -31,22 +31,35 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="江颖诗的博客">
-  <meta name="msapplication-starturl" content="https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">
+  <meta name="msapplication-starturl" content="http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">
   <meta name="msapplication-navbutton-color" content="#9C27B0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="江颖诗的博客">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/favicon.jpg">
 
   
-    <link rel="canonical" href="https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">
+    <link rel="canonical" href="http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">
   
 
-  
-  
+  <meta name="google-site-verification" content="fXjtlIfaDc_X-0P11rO3bEp1Nk4IKXphoJv0GqGZCco">
+  <meta name="baidu-site-verification" content="I3t1wfwZvd">
 
-  
-  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create','UA-139531378-1','auto');ga('send','pageview');
+</script>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?22e4d3b73c21ec2f0e1b4f3ff78c9a9c';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script>
   
 
   
@@ -57,7 +70,7 @@
 <link rel="stylesheet" href="/custom.css">
 
 </head>
-<body class="mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+<body class="mdui-appbar-with-toolbar mdui-theme-primary-brown mdui-theme-accent-blue">
   <script>var a=localStorage.getItem("mdui-theme-layout-dark");if(a){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
   <script>if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){document.getElementsByTagName("body")[0].className+=" mdui-theme-layout-dark"};</script>
   <script>var a=localStorage.getItem("mdui-drawer-close");if(!a){document.getElementsByTagName("body")[0].className+=" mdui-drawer-body-left"};</script>
@@ -66,26 +79,32 @@
     <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="mdui-icon material-icons">menu</i></a>
     <a href="/" class="mdui-typo-headline">江颖诗的博客</a>
     <div class="mdui-toolbar-spacer"></div>
-    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'Search'}"><i class="mdui-icon material-icons">search</i></a>
+    <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: '搜索'}"><i class="mdui-icon material-icons">search</i></a>
     <a href="/atom.xml" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: 'RSS'}"><i class="mdui-icon material-icons">rss_feed</i></a>
   </div>
 </header>
 <div class="mdui-dialog" id="search">
   
-    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="请输入关键字"><input type="hidden" name="sitesearch" value="https://jiangyingshi.github.io"></form>
-    <div class="search-result"></div>
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
   
 </div>
   <aside id="sidebar" class="mdui-drawer mdui-drawer-full-height">
   <script>var a=localStorage.getItem("mdui-drawer-close");if(a){document.getElementById("sidebar").className+=" mdui-drawer-close"};</script>
   <div class="mdui-grid-tile">
-    <img src="/images/banner.png" style="height: 160px;">
-    <img src="/images/avatar.png" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
+    <img src="/images/banner.jpg" style="height: 160px;">
+    <img src="/images/avatar.jpg" class="avatar-animation" style="position: absolute; top: 10%; left: 24px; width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;">
     <div class="mdui-grid-tile-actions">
       <div class="mdui-grid-tile-text">
         <div class="mdui-grid-tile-title">江颖诗</div>
         <div class="mdui-grid-tile-subtitle"><i class="mdui-icon material-icons">art_track</i>静水深流</div>
       </div>
+      
+        <div class="mdui-grid-tile-buttons">
+          <a href="mailto:1258787151@qq.com" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '1258787151@qq.com'}"><i class="mdui-icon material-icons">email</i></a>
+        </div>
       
     </div>
   </div>
@@ -93,18 +112,18 @@
   <div class="mdui-list" mdui-collapse="{accordion: true}">
     <a href="/" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
-      <div class="mdui-list-item-content">Home</div>
+      <div class="mdui-list-item-content">主页</div>
     </a>
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-0");if(a){document.getElementsByClassName("mdui-collapse-item")[0].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">archive</i>
-        <div class="mdui-list-item-content">Archive</div>
+        <div class="mdui-list-item-content">归档</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
-        <a class="mdui-ripple sidebar_archives-link" href="/archives/2022/03/">March 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/02/">February 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/01/">January 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/12/">December 2021<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/05/">May 2020<span class="mdui-ripple sidebar_archives-count">1</span></a>
+        <a class="mdui-ripple sidebar_archives-link" href="/archives/2022/03/">三月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/02/">二月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2022/01/">一月 2022<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2021/12/">十二月 2021<span class="mdui-ripple sidebar_archives-count">1</span></a><a class="mdui-ripple sidebar_archives-link" href="/archives/2020/05/">五月 2020<span class="mdui-ripple sidebar_archives-count">1</span></a>
         
       </div>
     </div>
@@ -112,7 +131,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-1");if(a){document.getElementsByClassName("mdui-collapse-item")[1].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">class</i>
-        <div class="mdui-list-item-content">Category</div>
+        <div class="mdui-list-item-content">分类</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -125,7 +144,7 @@
       <script>var a=localStorage.getItem("mdui-collapse-item-2");if(a){document.getElementsByClassName("mdui-collapse-item")[2].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
         <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">bookmark</i>
-        <div class="mdui-list-item-content">Tag</div>
+        <div class="mdui-list-item-content">标签</div>
         <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
@@ -136,7 +155,7 @@
     </div>
     <a href="/about" class="mdui-list-item mdui-ripple">
       <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">person</i>
-      <div class="mdui-list-item-content">About</div>
+      <div class="mdui-list-item-content">关于</div>
     </a>
   </div>
 
@@ -153,13 +172,13 @@
     <div class="mdui-collapse-item">
       <script>var a=localStorage.getItem("mdui-collapse-item-3");if(a){document.getElementsByClassName("mdui-collapse-item")[3].className+=" mdui-collapse-item-open"};</script>
       <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-        <div class="mdui-list-item-content">Links</div>
+        <div class="mdui-list-item-content">友情链接</div>
         <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
       </div>
       <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
         
         
-          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">No Links</a>
+          <a href="javascript:;" class="mdui-list-item mdui-p-l-2 mdui-text-color-theme mdui-ripple" style="justify-content: center;">链接为空</a>
         
       </div>
     </div>
@@ -172,11 +191,11 @@
   <style>#main article .mdui-card-content .center-block{display:block!important;margin-right:auto!important;margin-left:auto!important}</style>
   <article class="mdui-card mdui-m-b-5">
     <header class="mdui-card-media">
-      <img src="/images/random/material-8.png" style="max-height: 240px;">
+      <img src="/images/random/material-6.png" style="max-height: 240px;">
       <div class="mdui-card-media-covered">
         <div class="mdui-card-primary">
           <div class="mdui-card-primary-title">String 的长度限制</div>
-          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2022-02-13 / <i class="iconfont">&#xe601;</i> jiangyingshi</div>
+          <div class="mdui-card-primary-subtitle"><i class="iconfont">&#xe697;</i> 2022-02-13 / <i class="iconfont">&#xe601;</i> jiangyingshi &nbsp;&nbsp; <span id="busuanzi_container_page_pv" style="display: none;"><i class="iconfont">&#xe7fd;</i> <span id="busuanzi_value_page_pv"></span></span></div>
         </div>
       </div>
       <div class="mdui-card-menu">
@@ -188,7 +207,7 @@
             
             <li class="mdui-menu-item" disabled>
               
-                <img src="https://chart.googleapis.com/chart?cht=qr&chs=246x246&chl=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&chld=M|2">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADjElEQVR42u3ay27bQBAEQP3/TyfXAILl7pldQgGKJ8OWyFXp0J7H64/rn+uFAAcOHDhw4MCBAweOL+Z4xdf7u97v8NOdf3pv/vr3vyavjD4LDhw4cOC4wPFLFMWv+Xzo5Of8zu19fkTEgQMHDhzXONqP9DkghwXVx/O03FE848CBAweOr+RIwm9fLiZ8OHDgwIHjf+Ro4zYptJJA/dKgxYEDBw4ci+ZgEorJIVbtvFGTEQcOHDhwPMmRl1Xf//Oj+x04cODAgeONYzYWSh4zu1te+J0ad+HAgQMHjrMc7QLB2dLuHlDxRBw4cODAcY1jti6QDI32rb38WfnICgcOHDhw3OD4fIt8aNSOf1rWWVQnXzwOHDhw4LjBcQqlPdBsLS85T946xIEDBw4cZznadltSVrUfbB/tbejiwIEDB457HO0jZ7GXj6lmiwuzUMeBAwcOHM9w5DE5i9L2XXmUJkVdHbQ4cODAgWPBcSPwPh89b0fmi3H16AsHDhw4cDzOcapp2C4l5LG6Oi0OHDhw4LjAsRkRRWVSsDC9WePOi0McOHDgwPEMRx60nx9zapi0L/Pyog4HDhw4cJzlaOMt4WgHTkkReLbsxIEDBw4cz3PkxdVmta5dgNg8ZRW0OHDgwIGj3A1Lxv8HIm1U/uUESQlX90px4MCBA0fJsWn2JY88tYKwaVb+8jXjwIEDB46jHG105WsNbRDmpzq1hIEDBw4cOO5x5GHWhmh+/zbCkysqDnHgwIEDx1GOPCzbFl5eXOWg7Umifw5w4MCBA8cFjrw9t2nqbRYaZkt4dQmHAwcOHDgOcSRrDe34J19fa0dTs5W+YgqHAwcOHDgWHJuWXNsQbFclZisR9TgKBw4cOHAc5ZhF3akFiHx0NFu/iMpOHDhw4MBxgWPTKJyFXD7WKoqxcjSFAwcOHDie4WijcXb0drA0a1ZGZ8CBAwcOHNc4Zi28zcpC3qBsv4z868GBAwcOHGc59q26tnnXxnm7rpcPpXDgwIEDxw2OWVBtlhXacmu2nFfA4cCBAweOCxynxjmbRuEsqmfrDjhw4MCB4xmOdk0hCePkw2xGX6/ywoEDBw4c38zRNgH3xdsVUBw4cODA8WUcpwK7XW44VTriwIEDB457HHmTLj/0fpWhXXF4tFeKAwcOHDjWCw3tbzYjovwOLRYOHDhw4LjH4cKBAwcOHDhw4MCBA8eXXX8Bw/QCKsxlUgMAAAAASUVORK5CYII=">
               
             </li>
           </ul>
@@ -197,25 +216,25 @@
           <button class="mdui-btn mdui-btn-icon mdui-text-color-white" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="mdui-icon material-icons">share</i></button>
           <ul class="mdui-menu" id="share_menu">
             <li class="mdui-menu-item">
-              <a href="http://service.weibo.com/share/share.php?appkey=&title=String 的长度限制&url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&pic=https://jiangyingshi.github.io/images/favicon.png&searchPic=false&style=simple" target="_blank" class="mdui-ripple">Share to Weibo</a>
+              <a href="http://service.weibo.com/share/share.php?appkey=&title=String 的长度限制&url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&pic=http://jiangyingshi.top/images/favicon.jpg&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://twitter.com/intent/tweet?text=String 的长度限制&url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&via=江颖诗" target="_blank" class="mdui-ripple">Share to Twitter</a>
+              <a href="https://twitter.com/intent/tweet?text=String 的长度限制&url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&via=江颖诗" target="_blank" class="mdui-ripple">分享到 Twitter</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.facebook.com/sharer/sharer.php?u=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">Share to Facebook</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://plus.google.com/share?url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">Share to Google+</a>
+              <a href="https://plus.google.com/share?url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">分享到 Google+</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&title=String 的长度限制" target="_blank" class="mdui-ripple">Share to LinkedIn</a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&title=String 的长度限制" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="http://connect.qq.com/widget/shareqq/index.html?site=江颖诗的博客&title=String 的长度限制&pics=https://jiangyingshi.github.io/images/favicon.png&url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">Share to QQ</a>
+              <a href="http://connect.qq.com/widget/shareqq/index.html?site=江颖诗的博客&title=String 的长度限制&pics=http://jiangyingshi.top/images/favicon.jpg&url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" target="_blank" class="mdui-ripple">分享到 QQ</a>
             </li>
             <li class="mdui-menu-item">
-              <a href="https://telegram.me/share/url?url=https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&text=String 的长度限制" target="_blank" class="mdui-ripple">Share to Telegram</a>
+              <a href="https://telegram.me/share/url?url=http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/&text=String 的长度限制" target="_blank" class="mdui-ripple">分享到 Telegram</a>
             </li>
           </ul>
         
@@ -249,9 +268,13 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>字符串有长度限制，在编译期，要求字符串常量池中的常量不能超过65535，并且在javac执行过程中控制了最大值为65534。<br>在运行期，长度不能超过Int的范围，否则会抛异常</p>
 
       
+        <div class="mdui-m-y-2 mdui-text-center">
+          <button class="mdui-fab mdui-color-deep-orange mdui-text-color-white mdui-ripple" mdui-dialog="{target: '#donate'}" mdui-tooltip="{content: '打赏', position: 'top'}"><i class="mdui-icon material-icons">thumb_up</i></button>
+        </div>
+      
       <blockquote>
         
-        <strong>PermaLink: </strong><br><a href="https://jiangyingshi.github.io/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">https://jiangyingshi.github.io/2022/02/13/String-的长度限制/</a>
+        <strong>本文链接：</strong><br><a href="http://jiangyingshi.top/2022/02/13/String-%E7%9A%84%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/">http://jiangyingshi.top/2022/02/13/String-的长度限制/</a>
       </blockquote>
     </div>
     <footer class="mdui-card-actions">
@@ -262,6 +285,30 @@
         <a class="mdui-ripple article_tags-link" href="/tags/Java/" rel="tag">Java</a>
       
     </footer>
+    
+      <div class="mdui-dialog" id="donate">
+        <div class="mdui-tab mdui-tab-centered">
+          
+            <a href="#donate-0" class="mdui-ripple">支付宝</a>
+          
+            <a href="#donate-1" class="mdui-ripple">微信支付</a>
+          
+        </div>
+        
+        
+          <div id="donate-0" class="mdui-p-a-2 mdui-typo mdui-text-center">
+            
+              <img src="/images/alipay.jpg" style="width: 300px;">
+            
+          </div>
+        
+          <div id="donate-1" class="mdui-p-a-2 mdui-typo mdui-text-center">
+            
+              <img src="/images/wechat.jpg" style="width: 300px;">
+            
+          </div>
+        
+      </div>
     
   </article>
   
@@ -275,18 +322,36 @@
     
       <a rel="prev" class="extend prev" href="/2022/03/31/printf%E5%AF%BC%E8%87%B4%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
         <button aria-label="prev" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_back</i></button>
-        <span class="mdui-p-x-3" mdui-tooltip="{content: 'printf导致的内存泄漏'}">Prev</span>
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'printf导致的内存泄漏'}">上一篇</span>
       </a>
     
     <div class="spacer"></div>
     
       <a rel="next" class="extend next" href="/2022/01/31/Java%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%80%E5%AE%9A%E5%9C%A8%E5%A0%86%E4%B8%8A%E5%88%86%E9%85%8D%E5%90%97%EF%BC%9F/">
-        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Java中的对象一定在堆上分配吗？'}">Next</span>
+        <span class="mdui-p-x-3" mdui-tooltip="{content: 'Java中的对象一定在堆上分配吗？'}">下一篇</span>
         <button aria-label="next" class="mdui-btn mdui-btn-raised mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_forward</i></button>
       </a>
     
   </nav>
 
+
+  <div id="comment" class="mdui-m-t-5">
+    <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+    clientID: 'c3d07683889a30cce9f4',
+    clientSecret: '4075822d529574759bcaf8f1b55618cf6f1421f9',
+    repo: 'jiangyingshi.github.io',
+    owner: 'jingyingshi',
+    admin: ['jingyingshi'],
+    id: '6ebb7591-d6cd-eda1-83c2-1f8f0e728f2a' || location.pathname,
+    distractionFreeMode: false
+  });
+  gitalk.render('gitalk-container');
+</script>
+  </div>
 
 
 </main>
@@ -299,6 +364,8 @@
     
     
     
+      <a href="https://github.com/jiangyingshi" target="_blank" class="mdui-btn mdui-btn-icon mdui-text-color-theme-a100"><i class="mdui-icon iconfont">&#xe7ab;</i></a>
+    
     
     
     
@@ -308,11 +375,14 @@
   <div class="mdui-p-y-1 mdui-text-center">
     Copyright &copy; 2022 江颖诗<br>
     Powered by <a href="https://hexo.io/" target="_blank" class="mdui-text-color-theme-accent">Hexo</a>
+    <br>
+      <span id="busuanzi_container_site_pv" style="display: none;"><i class="iconfont">&#xe7fd;</i> <span id="busuanzi_value_site_pv"></span></span> &nbsp;&nbsp;
+      <span id="busuanzi_container_site_uv" style="display: none;"><i class="iconfont">&#xe601;</i> <span id="busuanzi_value_site_uv"></span></span>
     
   </div>
 </footer>
   <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">arrow_upward</i></button>
-  
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 <script src="/js/mdui.js"></script>
 <script src="/js/script.js"></script>
